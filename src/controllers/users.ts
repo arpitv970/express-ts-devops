@@ -1,6 +1,23 @@
 import { Request, Response } from "express";
 import { prisma } from "../index";
 
+export const fetchAllUser = async (req: Request, res: Response) => {
+  try {
+    const users = await prisma.user.findMany();
+
+    if (users.length === 0) {
+      throw new Error("No User exists in DB");
+    }
+
+    res.status(201).json({ data: users });
+  } catch (error: any) {
+    console.log(error);
+    res
+      .status(400)
+      .json({ error: error?.message || "Something went wrong..." });
+  }
+};
+
 export const createUser = async (req: Request, res: Response) => {
   try {
     const { name, email, age, img } = req.body;
@@ -13,12 +30,12 @@ export const createUser = async (req: Request, res: Response) => {
       data: {
         name,
         email,
-        age,
+        age: Number(age),
         img,
       },
     });
 
-    res.status(201).json(newUser);
+    res.status(201).json({ data: newUser });
   } catch (error: any) {
     console.log(error);
     res

@@ -3,10 +3,12 @@ import { PORT } from "./config/dotenv";
 import { router as indexRouter } from "./routers";
 import { userRouter } from "./routers/users";
 import { PrismaClient } from "@prisma/client";
+import cors from "cors";
 
 const app = express();
 export const prisma = new PrismaClient();
 
+app.use(cors())
 app.use(express.json());
 
 app.use("/api/v1", indexRouter);
