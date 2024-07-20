@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # db:
+  #   image: postgres:13
+  #   container_name: demo-devops-db
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: db
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - default
+
+  backend:
+    image: express-ts-devops
+    container_name: express-ts-con
+    ports:
+      - "8000:8000"
+    # depends_on:
+    #   - db
+    # environment:
+    #   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/devops?schema=public
+    # networks:
+    #   - default
+
+# networks:
+#   default:
+#     name: app-network
+#     driver: bridge

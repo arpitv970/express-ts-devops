@@ -7,15 +7,16 @@ RUN mkdir -p /home/app
 
 WORKDIR /home/app
 
-COPY package*.json .
-
-COPY prisma .
+COPY package.json package-lock.json ./
 
 RUN npm install
 
-COPY ./dist ./dist
+
+COPY . .
 
 RUN npx prisma generate
+
+RUN npm run build
 
 EXPOSE 8000
 
