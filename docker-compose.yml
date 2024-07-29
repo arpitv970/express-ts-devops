@@ -1,6 +1,6 @@
 services:
   backend:
-    image: express-ts-devops
+    image: 567319031259.dkr.ecr.ap-south-1.amazonaws.com/express-ts-devops:latest
     container_name: express-ts-con
     ports:
       - "8000:8000"
@@ -18,3 +18,8 @@ services:
       POSTGRES_DB: db
     ports:
       - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
+    driver: local
